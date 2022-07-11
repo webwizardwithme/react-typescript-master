@@ -25,6 +25,7 @@ export const App = () => {
     <>
       <HelloComponent userName={name} />
       <NameEditComponent
+        initialUserName={name}
         editingName={editingName}
         onNameUpdated={setUsernameState}
         onEditingNameUpdated={setEditingName}

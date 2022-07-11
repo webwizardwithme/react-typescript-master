@@ -1,6 +1,7 @@
 import * as React from "react";
 
 interface Props {
+  initialUserName: string;
   editingName: string;
   onNameUpdated: () => any;
   onEditingNameUpdated: (newEditingName: string) => any;
