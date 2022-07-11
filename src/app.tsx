@@ -29,6 +29,7 @@ export const App = () => {
         editingName={editingName}
         onNameUpdated={setUsernameState}
         onEditingNameUpdated={setEditingName}
+        disabled={editingName === "" || editingName === name}
       />
     </>
   );
