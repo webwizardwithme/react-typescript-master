@@ -6,52 +6,52 @@ interface Props {
   onColorUpdated: (color: Color) => void;
 }
 
+const updateColor = (props: Props, colorId: keyof Color) => (value: any) => {
+  // keyof Color ensures only 'red', 'green' or 'blue' can be passed in;
+  props.onColorUpdated({
+    ...props.color,
+    [colorId]: value,
+  });
+};
+
 export const ColorPicker: React.FC<Props> = (props) => (
   <div>
-    <input
-      type="range"
-      min="0"
-      max="255"
+    <ColorSliderComponent
       value={props.color.red}
-      onChange={(event) =>
-        props.onColorUpdated({
-          red: +event.target.value,
-          green: props.color.green,
-          blue: props.color.blue,
-        })
-      }
+      onValueUpdated={updateColor(props, "red")}
     />
-    {props.color.red}
     <br />
-    <input
-      type="range"
-      min="0"
-      max="255"
+    <ColorSliderComponent
       value={props.color.green}
-      onChange={(event: any) =>
-        props.onColorUpdated({
-          red: props.color.red,
-          green: event.target.value,
-          blue: props.color.blue,
-        })
-      }
+      onValueUpdated={updateColor(props, "green")}
     />
-    {props.color.green}
     <br />
-    <input
-      type="range"
-      min="0"
-      max="255"
+    <ColorSliderComponent
       value={props.color.blue}
-      onChange={(event: any) =>
-        props.onColorUpdated({
-          red: props.color.red,
-          green: props.color.green,
-          blue: event.target.value,
-        })
-      }
+      onValueUpdated={updateColor(props, "blue")}
     />
-    {props.color.blue}
     <br />
   </div>
 );
+
+interface PropsColorSlider {
+  value: number;
+  onValueUpdated: (newValue: number) => void;
+}
+
+const ColorSliderComponent: React.FC<PropsColorSlider> = (
+  props: PropsColorSlider
+) => {
+  return (
+    <div>
+      <input
+        type="range"
+        min="0"
+        max="255"
+        value={props.value}
+        onChange={(event) => props.onValueUpdated(+event.target.value)}
+      />
+      {props.value}
+    </div>
+  );
+};
