@@ -7,7 +7,7 @@ interface Props {
 }
 
 const updateColor = (props: Props, colorId: keyof Color) => (value: any) => {
-  // keyof Color ensures only 'red', 'green' or 'blue' can be passed in;
+  // key of color ensures only 'red', 'blue' or 'green' can be passed in.
   props.onColorUpdated({
     ...props.color,
     [colorId]: value,
