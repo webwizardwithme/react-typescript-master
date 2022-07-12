@@ -7,10 +7,9 @@ const useMemberCollection = () => {
     MemberEntity[]
   >([]);
 
-  const loadMemberCollection = () => {
-    getMembersCollection().then((memberCollection) =>
-      setMemberCollection(memberCollection)
-    );
+  const loadMemberCollection = async () => {
+    const memberCollection = await getMembersCollection();
+    setMemberCollection(memberCollection);
   };
 
   return { memberCollection, loadMemberCollection };
